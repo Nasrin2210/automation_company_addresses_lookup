@@ -1,0 +1,31 @@
+# read from csv that contains company name and find the address of the company using google map api
+# save the address in a new csv file
+
+
+import csv
+import requests
+import urllib
+import time
+
+# Set your Google Maps API key here
+api_key = 'YOUR_API_KEY'
+# read from csv file
+
+with open ('company_name.csv', 'r', encoding = 'utf-8-sig') as f:
+    reader=csv.DictReader(f)
+    for i in reader:
+        company_name=i['Company Name']
+        encoded_company=urllib.parse.quote(company_name)
+
+        response=requests.get('https://maps.googleapis.com/maps/api/place/textsearch/json?query='+encoded_company+'&key='+api_key)
+        try:parse_address=response.json()['results'][0]['formatted_address']
+            # print(parse_address)
+        except:
+            parse_address='None'
+
+        # break
+
+        with open('company_addresses.csv','a', newline='',encoding='utf-8-sig') as csvfile:
+            writer=csv.DictWriter(csvfile, fieldnames=['Company', 'Address'])
+            writer.writerow({'Company':company_name, 'Address':parse_address})
+            time.sleep(0.5)
