@@ -15,6 +15,7 @@ This repository provides multiple Python scripts for automating the process of f
 Usage:
 
 #Choose the method that best suits your needs.
+
 Provide your own Google Maps API key for accurate geocoding (replace 'YOUR_API_KEY' in the code).
 Ensure that you have the required libraries installed (e.g., requests, BeautifulSoup, openpyxl, gmaps, geopy).
 Prepare an input file with a list of company names (e.g., company_names.xlsx or Asia 891.csv).
